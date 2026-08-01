@@ -1,0 +1,40 @@
+name: Boletim Manaus Telegram
+
+on:
+  schedule:
+    - cron: "0 16 * * *"
+
+  workflow_dispatch:
+
+
+jobs:
+
+  enviar-noticias:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+
+
+      - name: Executar robô
+        env:
+          TOKEN_TELEGRAM: ${{ secrets.TOKEN_TELEGRAM }}
+          CHAT_ID_TELEGRAM: ${{ secrets.CHAT_ID_TELEGRAM }}
+
+        run: |
+          python noticias.py
