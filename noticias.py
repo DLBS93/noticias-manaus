@@ -106,7 +106,6 @@ for noticia in feed.entries:
     mensagem += f"""
 📰 {titulo}
 
-🔗 {link}
 
 ====================
 
